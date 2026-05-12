@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+spacy
+transformers
+torch
+pandas
+deep-translator

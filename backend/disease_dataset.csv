@@ -1,0 +1,118 @@
+symptom,disease,medicine_1,medicine_2,doctor_1,doctor_2,follow_up
+fever,Viral Infection / Influenza,Paracetamol (Crocin/Dolo 650),Electral Powder,General Physician,Infectious Disease Specialist,Do you also have body pain or a sore throat?
+headache,Migraine or Tension Headache,Ibuprofen,Rest in a dark room,Neurologist,General Physician,Are you experiencing any sensitivity to light or nausea?
+cough,Respiratory Infection,Cough Syrup (Benadryl/Honitus),Warm Salt Water Gargle,Pulmonologist,ENT Specialist,Is it a dry cough or are you coughing up mucus?
+stomach ache,Gastritis or Food Poisoning,Antacids (Gelusil/Digene),Probiotics,Gastroenterologist,General Physician,Do you also have vomiting or diarrhea?
+fatigue,Anemia or Viral Aftermath,Multivitamin supplements,Proper hydration,General Physician,Endocrinologist,Are you also experiencing dizziness or shortness of breath?
+chest pain,Heart Condition,Emergency Care Required,Aspirin,Cardiologist,Emergency Specialist,Are you having difficulty breathing?
+rash,Allergic Reaction,Antihistamine (Cetirizine),Hydrocortisone Cream,Dermatologist,Allergist,Is the rash spreading rapidly?
+joint pain,Arthritis,Diclofenac,Hot Compress,Rheumatologist,Orthopedist,Do you also have swelling in the joints?
+sore throat,Pharyngitis / Tonsillitis,Throat Lozenges (Strepsils),Betadine Gargle,ENT Specialist,General Physician,Are you having trouble swallowing?
+back pain,Muscle Strain or Slip Disc,Muscle Relaxants,Hot/Cold Compress,Orthopedist,Physiotherapist,Does the pain shoot down your leg?
+toothache,Dental Cavity or Infection,Clove Oil,Painkillers (Combiflam),Dentist,Endodontist,Is there any swelling around your gums?
+dizziness,Vertigo or Low Blood Pressure,Meclizine,Hydration with Electrolytes,Neurologist,Cardiologist,Does the spinning happen when you change head positions?
+nausea,Motion Sickness or Indigestion,Ondansetron,Ginger Tea,Gastroenterologist,General Physician,Are you also throwing up?
+frequent urination,Urinary Tract Infection (UTI) or Diabetes,Cranberry Extract,Antibiotics (Requires Prescription),Urologist,Endocrinologist,Is there a burning sensation when you urinate?
+wheezing,Asthma or Bronchitis,Inhaler (Requires Prescription),Steam Inhalation,Pulmonologist,Allergist,Are you experiencing a tight chest?
+high blood sugar,Diabetes Mellitus,Metformin (Requires Prescription),Dietary Control,Endocrinologist,Dietician,Are you feeling excessively thirsty?
+high blood pressure,Hypertension,Amlodipine (Requires Prescription),Low Sodium Diet,Cardiologist,General Physician,Are you experiencing frequent headaches or blurred vision?
+chills,Malaria or Typhoid,Antimalarials (Requires Prescription),Paracetamol,Infectious Disease Specialist,General Physician,Is your fever fluctuating with heavy sweating?
+muscle cramps,Electrolyte Imbalance or Dehydration,Magnesium Supplements,Oral Rehydration Salts (ORS),General Physician,Sports Medicine Specialist,Are you drinking enough water daily?
+constipation,Dietary Fiber Deficiency or IBS,Laxatives (Dulcolax),Psyllium Husk (Isabgol),Gastroenterologist,Dietician,Do you have severe abdominal pain?
+runny nose,Common Cold or Allergic Rhinitis,Nasal Decongestant (Otrivin),Antihistamines (Allegra),ENT Specialist,Allergist,Do you also have itchy or watery eyes?
+hair loss,Alopecia or Vitamin Deficiency,Biotin Supplements,Minoxidil,Dermatologist,Trichologist,Are you under excessive stress recently?
+blurry vision,Refractive Error or Cataract,Lubricating Eye Drops,Corrective Lenses,Ophthalmologist,Optometrist,Do you see halos around lights?
+palpitations,Arrhythmia or Anxiety,Beta Blockers (Requires Prescription),Deep Breathing Exercises,Cardiologist,Psychiatrist,Are you feeling unusually anxious or stressed?
+earache,Otitis Media (Ear Infection),Ear Drops (Antibiotic),Paracetamol,ENT Specialist,General Physician,Is there any discharge from your ear?
+diarrhea,Gastroenteritis (Stomach Bug),Loperamide,Oral Rehydration Salts (ORS),Gastroenterologist,General Physician,Are you also experiencing fever or severe cramps?
+vomiting,Food Poisoning or Viral Gastroenteritis,Domperidone,Electrolyte Fluids,Gastroenterologist,General Physician,Can you keep any fluids down?
+acid reflux,GERD (Gastroesophageal Reflux Disease),Pantoprazole,Antacids (Digene),Gastroenterologist,General Physician,Does the burning sensation worsen when you lie down?
+heartburn,Acidity or Indigestion,Omeprazole,Cold Milk,Gastroenterologist,General Physician,Does it happen right after eating heavy meals?
+indigestion,Dyspepsia,Enzyme Syrups (Aristozyme),Fennel Tea,Gastroenterologist,Dietician,Do you feel overly full quickly when eating?
+bloating,Irritable Bowel Syndrome (IBS),Simethicone,Peppermint Tea,Gastroenterologist,General Physician,Do you experience this mostly after consuming dairy?
+weight loss,Hyperthyroidism or Diabetes,Nutritional Supplements,Check Thyroid Levels,Endocrinologist,General Physician,Have you noticed an increased appetite despite losing weight?
+weight gain,Hypothyroidism or PCOS,Thyroxine (Requires Prescription),Dietary Control,Endocrinologist,Gynecologist,Are you also feeling unusually cold or fatigued?
+loss of appetite,Liver Dysfunction or Stress,Liver Tonics (Liv52),Vitamin B Complex,Hepatologist,Psychiatrist,Are you also experiencing yellowing of eyes or skin?
+excessive sweating,Hyperhidrosis or Thyroid Issues,Antiperspirants,Stay Hydrated,Endocrinologist,Dermatologist,Do you sweat even in cold environments?
+night sweats,Tuberculosis or Menopause,Antibiotics (Requires Prescription),Hormone Therapy,Infectious Disease Specialist,Gynecologist,Are you experiencing a persistent cough as well?
+cold hands,Raynaud's Disease or Poor Circulation,Warm Gloves,Nifedipine (Requires Prescription),Rheumatologist,Cardiologist,Do your fingers turn white or blue in the cold?
+pale skin,Anemia (Iron Deficiency),Iron Supplements,Vitamin C,Hematologist,General Physician,Are you also feeling extremely fatigued or weak?
+yellow skin,Jaundice or Hepatitis,Liver Tonics (Liv52),Rest & Hydration,Hepatologist,Gastroenterologist,Is your urine dark in color?
+dry skin,Eczema or Dehydration,Moisturizers (Cetaphil),Hydration,Dermatologist,General Physician,Is the skin also severely itchy or flaky?
+itchy skin,Allergic Reaction or Scabies,Calamine Lotion,Antihistamines (Cetirizine),Dermatologist,Allergist,Is the itching worse at night?
+hives,Urticaria,Fexofenadine,Cool Compress,Dermatologist,Allergist,Are you having any difficulty breathing?
+acne,Acne Vulgaris,Salicylic Acid Face Wash,Benzoyl Peroxide,Dermatologist,Cosmetologist,Are the breakouts highly inflamed or cystic?
+dandruff,Seborrheic Dermatitis,Ketoconazole Shampoo,Tea Tree Oil,Dermatologist,Trichologist,Is your scalp also very itchy?
+brittle nails,Vitamin Deficiency or Fungal Infection,Biotin Supplements,Antifungal Cream,Dermatologist,General Physician,Have you noticed a change in nail color?
+mouth ulcers,Aphthous Stomatitis,Vitamin B12 Supplements,Oral Numbing Gel,Dentist,General Physician,Do the ulcers make it difficult to eat or drink?
+dry mouth,Xerostomia or Dehydration,Sugar-free Gum,Increased Water Intake,Dentist,General Physician,Are you currently taking any new medications?
+bad breath,Halitosis or Gum Disease,Antibacterial Mouthwash,Proper Dental Hygiene,Dentist,Periodontist,Do your gums bleed when you brush?
+swollen gums,Gingivitis,Salt Water Gargle,Vitamin C Supplements,Dentist,Periodontist,Are your gums painful to touch?
+jaw pain,TMJ Disorder or Dental Issues,Muscle Relaxants,Warm Compress,Dentist,Maxillofacial Surgeon,Do you hear a clicking sound when you open your mouth?
+neck pain,Cervical Spondylosis or Strain,Muscle Relaxants,Neck Collar,Orthopedist,Physiotherapist,Does the pain radiate down your arms?
+shoulder pain,Rotator Cuff Injury or Frozen Shoulder,Ibuprofen,Physiotherapy,Orthopedist,Physiotherapist,Do you have trouble lifting your arm above your head?
+knee pain,Osteoarthritis or Ligament Injury,Glucosamine Supplements,Knee Support Cap,Orthopedist,Rheumatologist,Is the knee swollen or buckling when you walk?
+ankle pain,Ankle Sprain,Ice Pack,Crepe Bandage,Orthopedist,Sports Medicine Specialist,Did you recently twist or roll your ankle?
+foot pain,Plantar Fasciitis,Arch Support Shoes,Painkillers,Podiatrist,Orthopedist,Is the pain worst during your first steps in the morning?
+muscle weakness,Myopathy or Neuropathy,Vitamin D Supplements,Physiotherapy,Neurologist,Orthopedist,Is the weakness affecting one specific side of your body?
+numbness,Peripheral Neuropathy or Nerve Compression,Vitamin B12,Pregabalin (Requires Prescription),Neurologist,Orthopedist,Is the numbness constant or does it come and go?
+tremors,Essential Tremor or Parkinson's,Beta Blockers (Requires Prescription),Physical Therapy,Neurologist,Movement Disorder Specialist,Do the tremors stop when you are resting?
+poor balance,Vertigo or Inner Ear Issue,Betahistine,Vestibular Therapy,ENT Specialist,Neurologist,Do you feel like the room is spinning?
+memory loss,Dementia or Severe Stress,Cognitive Therapy,Ginkgo Biloba,Neurologist,Psychiatrist,Is this a sudden onset or gradual over months?
+confusion,Delirium or Severe Infection,Seek Emergency Care,Hydration,Neurologist,Emergency Specialist,Do you also have a high fever?
+difficulty swallowing,Dysphagia or Tonsillitis,Throat Lozenges,Warm Fluids,ENT Specialist,Gastroenterologist,Does food feel like it is stuck in your chest?
+loss of taste,COVID-19 or Sinusitis,Zinc Supplements,Steam Inhalation,ENT Specialist,General Physician,Have you also lost your sense of smell?
+loss of smell,Anosmia (Post-Viral),Nasal Steroid Spray,Smell Training,ENT Specialist,General Physician,Do you have a severely blocked nose?
+ringing in ears,Tinnitus,White Noise Therapy,Avoid Loud Noises,ENT Specialist,Audiologist,Is the ringing constant or pulsating?
+hearing loss,Wax Impaction or Presbycusis,Ear Wax Softener (Waxolve),Hearing Aids,ENT Specialist,Audiologist,Did the hearing loss occur suddenly?
+eye pain,Glaucoma or Eye Strain,Lubricating Drops,Rest Eyes,Ophthalmologist,Optometrist,Is your vision also blurry?
+red eyes,Conjunctivitis (Pink Eye),Antibiotic Eye Drops,Cold Compress,Ophthalmologist,General Physician,Is there a sticky discharge from your eyes?
+watery eyes,Allergies or Blocked Tear Duct,Antihistamine Drops,Warm Compress,Ophthalmologist,Allergist,Are your eyes also itching?
+light sensitivity,Photophobia or Migraine,Wear Sunglasses,Rest in dark room,Ophthalmologist,Neurologist,Are you also experiencing a severe headache?
+double vision,Diplopia or Neurological Issue,Seek Medical Eval,Eye Patch,Ophthalmologist,Neurologist,Does it go away if you cover one eye?
+eyelid twitching,Myokymia (Stress/Fatigue),Reduce Caffeine,Get More Sleep,Ophthalmologist,Neurologist,Are you under a lot of stress lately?
+stuffy nose,Sinusitis or Cold,Saline Nasal Spray,Steam Inhalation,ENT Specialist,General Physician,Do you feel pressure in your forehead or cheeks?
+sneezing,Allergic Rhinitis,Cetirizine,Avoid Allergens,Allergist,ENT Specialist,Are you exposed to dust or pollen?
+nosebleeds,Epistaxis or Dry Air,Pinch Nose Forward,Nasal Saline Gel,ENT Specialist,General Physician,Do the bleeds last longer than 20 minutes?
+snoring,Sleep Apnea,CPAP Machine,Weight Loss,Pulmonologist,Sleep Specialist,Do you wake up gasping for air?
+insomnia,Anxiety or Poor Sleep Hygiene,Melatonin,Chamomile Tea,Psychiatrist,Sleep Specialist,Do you have trouble falling asleep or staying asleep?
+daytime sleepiness,Narcolepsy or Sleep Apnea,Modafinil (Requires Prescription),Fix Sleep Schedule,Sleep Specialist,Neurologist,Do you fall asleep suddenly during the day?
+rapid breathing,Hyperventilation or Asthma,Breathe into Paper Bag,Inhaler,Pulmonologist,Psychiatrist,Are you feeling extremely anxious?
+shortness of breath,Asthma or Heart Failure,Seek Emergency Care if severe,Inhaler,Pulmonologist,Cardiologist,Do you get breathless while lying flat?
+coughing up blood,Tuberculosis or Lung Issue,Seek Emergency Care,Antibiotics (Requires Prescription),Pulmonologist,Infectious Disease Specialist,Do you also have night sweats and weight loss?
+irregular heartbeat,Arrhythmia (Atrial Fibrillation),ECG Eval Required,Beta Blockers,Cardiologist,Emergency Specialist,Do you feel faint or dizzy?
+chest tightness,Angina or Asthma,Nitroglycerin (Requires Prescription),Inhaler,Cardiologist,Pulmonologist,Does the tightness worsen with physical exertion?
+swollen legs,Edema or Heart/Kidney Issue,Diuretics (Requires Prescription),Elevate Legs,Cardiologist,Nephrologist,Are both legs equally swollen?
+enlarged lymph nodes,Infection or Lymphoma,Antibiotics (Requires Prescription),Warm Compress,General Physician,Oncologist,Are the nodes painful to touch?
+breast lump,Fibroadenoma or Breast Cancer,Mammogram Required,Painkillers,Gynecologist,Oncologist,Is the lump hard and immobile?
+breast pain,Mastalgia or Hormonal Changes,Supportive Bra,Evening Primrose Oil,Gynecologist,General Physician,Does the pain fluctuate with your menstrual cycle?
+heavy periods,Menorrhagia or Fibroids,Tranexamic Acid (Requires Prescription),Iron Supplements,Gynecologist,Endocrinologist,Are you passing large blood clots?
+irregular periods,PCOS or Hormonal Imbalance,Oral Contraceptives (Requires Prescription),Weight Management,Gynecologist,Endocrinologist,Have you noticed excess facial hair or acne?
+painful periods,Dysmenorrhea or Endometriosis,Mefenamic Acid (Meftal Spas),Hot Water Bag,Gynecologist,General Physician,Is the pain severe enough to miss work/school?
+pelvic pain,Pelvic Inflammatory Disease (PID),Antibiotics (Requires Prescription),Painkillers,Gynecologist,Urologist,Do you also have a fever or unusual discharge?
+vaginal discharge,Yeast Infection or Bacterial Vaginosis,Antifungal Cream (Clotrimazole),Probiotics,Gynecologist,General Physician,Is there an unusual odor or itching?
+vaginal itching,Candidiasis (Yeast Infection),Fluconazole,Maintain Hygiene,Gynecologist,Dermatologist,Is there a thick white discharge?
+testicular pain,Epididymitis or Torsion,Seek Emergency Care if sudden,Antibiotics,Urologist,Emergency Specialist,Did the pain start suddenly and severely?
+blood in urine,Hematuria (Kidney Stones/UTI),Drink Plenty of Water,Antibiotics (Requires Prescription),Urologist,Nephrologist,Are you experiencing severe back or side pain?
+dark urine,Dehydration or Liver Disease,Increase Water Intake,Liver Function Test,Hepatologist,General Physician,Are your eyes or skin appearing yellow?
+cloudy urine,Urinary Tract Infection (UTI),Cranberry Juice,Antibiotics (Requires Prescription),Urologist,General Physician,Does it burn when you urinate?
+frothy urine,Proteinuria (Kidney Issue),Limit Protein Intake,Kidney Function Test,Nephrologist,General Physician,Do you also have swelling in your legs or face?
+blood in stool,Hemorrhoids or Fissure,Stool Softeners,Sitz Bath,Gastroenterologist,Proctologist,Is the blood bright red or dark/black?
+black stool,Upper GI Bleeding or Iron Supplements,Stop NSAIDs,Seek Medical Eval,Gastroenterologist,Emergency Specialist,Have you been taking Iron supplements recently?
+frequent bowel movements,IBS or Hyperthyroidism,Loperamide,High Fiber Diet,Gastroenterologist,Endocrinologist,Is the stool completely liquid?
+anal itching,Pinworms or Hemorrhoids,Anti-parasitic meds (Albendazole),Hydrocortisone Cream,Gastroenterologist,General Physician,Is the itching worse at night?
+anal pain,Anal Fissure or Abscess,Lidocaine Gel,Warm Sitz Bath,Proctologist,Gastroenterologist,Does the pain spike during bowel movements?
+lower back pain,Sciatica or Lumbar Strain,Muscle Relaxants,Physiotherapy,Orthopedist,Neurologist,Does the pain shoot down into your leg or foot?
+upper back pain,Poor Posture or Muscle Knot,Ergonomic Correction,Massage Therapy,Physiotherapist,Orthopedist,Do you spend long hours working on a computer?
+rib pain,Costochondritis or Rib Fracture,Ibuprofen,Rest,Orthopedist,General Physician,Does it hurt more when you take a deep breath?
+tailbone pain,Coccydynia,Donut Cushion,Painkillers,Orthopedist,Physiotherapist,Did you recently suffer a fall on your buttocks?
+groin pain,Hernia or Muscle Strain,Rest,Surgery Eval (If Hernia),General Surgeon,Orthopedist,Is there a visible bulge in your groin area?
+side stitch,Exercise Cramp,Stretching,Hydration,Sports Medicine Specialist,General Physician,Did this occur during intense running or exercise?
+generalized body ache,Fibromyalgia or Viral Fever,Paracetamol,Rest,Rheumatologist,General Physician,Do you also have a fever?
+lethargy,Chronic Fatigue Syndrome,Vitamin B12,Healthy Diet,Endocrinologist,General Physician,Do you feel tired even after a full night of sleep?
+irritability,Stress or Hormonal Imbalance,Meditation,Hormone Panel,Psychiatrist,Endocrinologist,Are you experiencing sudden mood swings?
+mood swings,Bipolar Disorder or PMS,Mood Stabilizers (Requires Prescription),Cognitive Behavioral Therapy,Psychiatrist,Gynecologist,Do you cycle between extreme highs and lows?
+anxiety,Generalized Anxiety Disorder (GAD),SSRIs (Requires Prescription),Therapy,Psychiatrist,Psychologist,Do you experience racing thoughts and restlessness?
+depression,Major Depressive Disorder,Antidepressants (Requires Prescription),Counseling,Psychiatrist,Psychologist,Have you lost interest in activities you usually enjoy?
+panic attacks,Panic Disorder,Benzodiazepines (Requires Prescription),Breathing Exercises,Psychiatrist,Psychologist,"Do you feel a sudden, intense fear accompanied by heart racing?"
+paranoia,Schizophrenia or Severe Anxiety,Antipsychotics (Requires Prescription),Therapy,Psychiatrist,Psychologist,Do you feel like you are being constantly watched or followed?
