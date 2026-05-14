@@ -13,4 +13,3 @@ python-dotenv
 pandas
 deep-translator
 bcrypt
-passlib

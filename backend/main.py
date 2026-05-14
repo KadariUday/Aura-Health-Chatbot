@@ -5,16 +5,18 @@ from nlp_engine import nlp_engine
 from typing import List, Optional
 import sqlite3
 import os
-from passlib.context import CryptContext
+import bcrypt
 
 # Password Hashing Setup
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+def get_password_hash(password: str) -> str:
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
-def get_password_hash(password):
-    return pwd_context.hash(password)
-
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    try:
+        return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+    except ValueError:
+        return False
 
 app = FastAPI(title="Health Assistant API v2.0", description="Backend for the AI Healthcare Chatbot")
 
