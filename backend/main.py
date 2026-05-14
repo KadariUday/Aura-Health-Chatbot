@@ -26,6 +26,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {"message": "Aura Health API is running", "version": "2.0"}
+
 # SQLite Configuration (Hosting Friendly)
 DB_PATH = "aura_health.db"
 
