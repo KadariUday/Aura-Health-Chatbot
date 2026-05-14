@@ -11,3 +11,6 @@ python-multipart
 email-validator
 python-dotenv
 pandas
+deep-translator
+bcrypt
+passlib

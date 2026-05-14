@@ -81,7 +81,7 @@ class HealthcareNLPEngine:
 
         return found
 
-    def process_query(self, text: str, session_id: str, language: str):
+    def get_response(self, text: str, language: str = "en"):
         text_lower = text.lower().strip()
 
         # 1. Emergency Detection
