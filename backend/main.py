@@ -18,15 +18,19 @@ def verify_password(plain_password, hashed_password):
 
 app = FastAPI(title="Health Assistant API v2.0", description="Backend for the AI Healthcare Chatbot")
 
+# Add your specific frontend URLs here
+origins = [
+    "http://localhost:3000", # For local development testing
+    "http://localhost:5173", # If using Vite locally
+    "https://aura-health-chatbot.vercel.app", # Your live Vercel frontend
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://aura-health-chatbot.vercel.app"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"], # Allows all methods (GET, POST, OPTIONS, etc.)
+    allow_headers=["*"], # Allows all headers
 )
 
 @app.get("/")
