@@ -73,6 +73,12 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
 
+class ChangePasswordRequest(BaseModel):
+    email: EmailStr
+    old_password: str
+    new_password: str
+
+
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
@@ -111,6 +117,24 @@ async def login(user: UserBase):
         }
     else:
         raise HTTPException(status_code=401, detail="Invalid email or password")
+
+@app.post("/api/change-password")
+async def change_password(request: ChangePasswordRequest):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT password FROM users WHERE email = ?", (request.email,))
+    row = cursor.fetchone()
+    
+    if not row or not verify_password(request.old_password, row["password"]):
+        conn.close()
+        raise HTTPException(status_code=401, detail="Current password incorrect")
+    
+    new_hashed = get_password_hash(request.new_password)
+    cursor.execute("UPDATE users SET password = ? WHERE email = ?", (new_hashed, request.email))
+    conn.commit()
+    conn.close()
+    return {"message": "Password updated successfully"}
+
 
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
