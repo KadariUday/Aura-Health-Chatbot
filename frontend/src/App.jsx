@@ -1149,8 +1149,8 @@ export default function App() {
       const currentTime = new Date().getTime();
       const timeElapsed = currentTime - parseInt(loginTime, 10);
       
-      // 30 minutes = 30 * 60 * 1000 = 1800000 milliseconds
-      if (timeElapsed > 1800000) {
+      // 24 hours = 24 * 60 * 60 * 1000 = 86400000 milliseconds
+      if (timeElapsed > 86400000) {
         handleLogout(); // Session expired
       } else {
         setUser(JSON.parse(loggedInUser));
@@ -1171,9 +1171,9 @@ export default function App() {
       if (loginTime) {
         const currentTime = new Date().getTime();
         const timeElapsed = currentTime - parseInt(loginTime, 10);
-        if (timeElapsed > 1800000) {
+        if (timeElapsed > 86400000) {
           handleLogout();
-          alert("Your secure session has expired (30 minutes). For your safety, please log in again.");
+          alert("Your secure session has expired. For your safety, please log in again.");
         }
       }
     }, 60000); // Check every minute
