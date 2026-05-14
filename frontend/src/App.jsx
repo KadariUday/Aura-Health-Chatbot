@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+
+const API_BASE_URL = "http://127.0.0.1:8000";
+
 import { 
   HeartPulse, LogOut, Paperclip, Mic, Send, Calendar, 
   FileText, Pill, UserCircle2, Bot, ChevronRight, Menu, X, CheckCircle2, Lock, Mail, User as UserIcon, Globe, AlertTriangle, BookOpen, Activity, Phone, MapPin, Plus, MessageSquare, Clock, Heart
@@ -10,7 +13,7 @@ const AuthPage = ({ onLogin }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -19,24 +22,26 @@ const AuthPage = ({ onLogin }) => {
       return;
     }
 
-    if (isLogin) {
-      const users = JSON.parse(localStorage.getItem('medchat_users') || '[]');
-      const user = users.find(u => u.email === formData.email && u.password === formData.password);
-      if (user) {
+    try {
+      if (isLogin) {
+        const response = await axios.post(`${API_BASE_URL}/api/login`, {
+          email: formData.email,
+          password: formData.password
+        });
+        // Normalize backend response 'username' to 'name' for frontend consistency
+        const user = { name: response.data.user.username, email: response.data.user.email };
         onLogin(user);
       } else {
-        setError('Invalid email or password.');
+        const response = await axios.post(`${API_BASE_URL}/api/signup`, {
+          username: formData.name,
+          email: formData.email,
+          password: formData.password
+        });
+        const user = { name: response.data.user.username, email: response.data.user.email };
+        onLogin(user);
       }
-    } else {
-      const users = JSON.parse(localStorage.getItem('medchat_users') || '[]');
-      if (users.find(u => u.email === formData.email)) {
-        setError('Email already registered. Please sign in.');
-        return;
-      }
-      const newUser = { name: formData.name, email: formData.email, password: formData.password };
-      users.push(newUser);
-      localStorage.setItem('medchat_users', JSON.stringify(users));
-      onLogin(newUser);
+    } catch (err) {
+      setError(err.response?.data?.detail || 'An error occurred during authentication. Make sure backend is running.');
     }
   };
 
@@ -138,6 +143,17 @@ const AuthPage = ({ onLogin }) => {
           </div>
         </div>
       </div>
+      
+      <footer className="mt-8 flex flex-col items-center gap-3 z-10">
+        <a href="https://www.linkedin.com/in/kadariuday" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 hover:bg-white/20">
+          <UserCircle2 size={16} /> Contact Us (LinkedIn)
+        </a>
+        <div className="flex items-center gap-2 px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-[10px] font-bold text-blue-100 shadow-lg backdrop-blur-sm tracking-widest uppercase animate-pulse">
+           <span className="w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_8px_rgba(96,165,250,0.8)]"></span>
+           Maintained by Kadari Uday
+        </div>
+      </footer>
+
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes blob { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } 100% { transform: translate(0px, 0px) scale(1); } }
         .animate-blob { animation: blob 7s infinite alternate; }
@@ -198,12 +214,10 @@ const Dashboard = ({ user, onLogout }) => {
   const [isRecording, setIsRecording] = useState(false);
 
   const [doctorsDb, setDoctorsDb] = useState(() => {
-    const saved = localStorage.getItem('medchat_doctors');
-    if (saved) return JSON.parse(saved);
-    return {
+    const defaultList = {
+      "General Physician": { name: "Dr. Kadari Uday", phone: "+91 98765 43210", email: "kadariuday2233@gmail.com", hospital: "Apollo Hospitals" },
       "Cardiologist": { name: "Dr. Rajesh Sharma", phone: "+91 98765 43210", email: "dr.sharma@heartcare.in", hospital: "Apollo Hospitals" },
       "Neurologist": { name: "Dr. Anjali Desai", phone: "+91 98765 43211", email: "anjali.neuro@citymed.in", hospital: "City Medical Center" },
-      "General Physician": { name: "Dr. Vikram Singh", phone: "+91 98765 43212", email: "dr.vikram@medclinic.in", hospital: "MedCare Clinic" },
       "ENT Specialist": { name: "Dr. Priya Patel", phone: "+91 98765 43213", email: "priya.ent@carehospital.in", hospital: "Care Hospitals" },
       "Pulmonologist": { name: "Dr. Amit Kumar", phone: "+91 98765 43214", email: "amit.pulmo@breathewell.in", hospital: "BreatheWell Lung Center" },
       "Gastroenterologist": { name: "Dr. Neha Gupta", phone: "+91 98765 43215", email: "neha.gastro@digestive.in", hospital: "Digestive Health Institute" },
@@ -232,7 +246,17 @@ const Dashboard = ({ user, onLogout }) => {
       "Sports Medicine Specialist": { name: "Dr. Arjun Patel", phone: "+91 98765 43237", email: "arjun.sports@sportsmed.in", hospital: "Sports Injury Clinic" },
       "Psychologist": { name: "Dr. Smriti Irani", phone: "+91 98765 43238", email: "smriti.psych@therapy.in", hospital: "Therapy & Counseling Center" }
     };
+    
+    const saved = localStorage.getItem('medchat_doctors');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Ensure default doctors (like Dr. Kadari Uday) are updated/included
+      return { ...parsed, ...defaultList };
+    }
+    return defaultList;
   });
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('medchat_doctors', JSON.stringify(doctorsDb));
@@ -267,66 +291,65 @@ const Dashboard = ({ user, onLogout }) => {
       appointments: [{ doctor: bookingData.doctor.name, time: dateStr, status: 'Confirmed' }, ...prev.appointments]
     }));
     
-    // Generate the direct string output
-    const emailStringOutput = `TO: ${bookingData.doctor.email}
-SUBJECT: Appointment Request - ${user.name}
+    // Generate the direct string output as requested in the screenshot
+    const appointmentDetails = `Appointment with Dr. ${bookingData.doctor.name}
+Scheduled for: ${dateStr}
 
-Dear Dr. ${bookingData.doctor.name},
-
-A new appointment request has been scheduled via Aura Health Chatbot.
-
-PATIENT DETAILS:
-- Name: ${user.name}
-- Email: ${user.email}
-- Requested Schedule: ${dateStr}
-
-PROBLEM DESCRIPTION / SYMPTOMS:
+Patient Problem:
 ${bookingData.problem}
 
 -----------------------------------------
-SYSTEM STATUS: Message routed successfully.`;
+SYSTEM STATUS: Message routed successfully via MedChat AI.`;
 
-    // Check if it's a newly entered custom doctor
-    const defaultDoctors = ["Dr. Rajesh Sharma", "Dr. Anjali Desai", "Dr. Vikram Singh", "Dr. Priya Patel", "Dr. Amit Kumar", "Dr. Neha Gupta"];
-    const isCustomDoctor = !defaultDoctors.includes(bookingData.doctor.name);
-
-    // Send securely to the respective doctor's email directly via backend
+    // Send to the doctor's email via FormSubmit
     try {
       const targetEmail = bookingData.doctor.email;
       
-      const payload = isCustomDoctor ? {
-          // String method only for new doctors
-          _subject: `New Appointment Request - ${user.name}`,
-          _captcha: "false",
-          message: emailStringOutput
-      } : {
-          // Structured Table for default doctors
-          _subject: `New Appointment Request - ${user.name}`,
-          _captcha: "false",
-          _template: "table",
-          "Patient Name": user.name,
-          "Contact Email": user.email,
-          "Doctor Selected": bookingData.doctor.name,
-          "Requested Date": bookingData.date,
-          "Requested Time": bookingData.time,
-          "Problem Description": bookingData.problem
+      console.log("Attempting to send email to:", targetEmail);
+
+      // Using a hidden form submission to an iframe to completely bypass CORS issues
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      const form = document.createElement('form');
+      form.action = `https://formsubmit.co/${targetEmail}`;
+      form.method = 'POST';
+      form.target = 'hidden_iframe';
+
+      const fields = {
+        _subject: `New Appointment Request from ${user.name}`,
+        _captcha: "false",
+        name: user.name,
+        email: user.email,
+        message: appointmentDetails
       };
 
-      await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
-          method: "POST",
-          headers: { 
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-      });
+      for (const key in fields) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // Clean up DOM after submission
+      setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 1000);
+
+      showToast(`✅ Appointment Request Sent to ${targetEmail}!`);
     } catch (e) {
-      console.error("Email routing failed:", e);
+      console.error("Submission failed:", e);
+      showToast(`❌ Error: ${e.message}`);
     }
 
-    // Close modal and show success toast
     setModal({ isOpen: false, type: null });
-    showToast(`✅ Appointment confirmed & Email routed successfully!`);
   };
 
   const handleAddDoctorSubmit = (e) => {
@@ -379,7 +402,7 @@ SYSTEM STATUS: Message routed successfully.`;
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/chat', {
+      const response = await axios.post(`${API_BASE_URL}/api/chat`, {
         message: userMessage,
         session_id: user.email,
         language: language
@@ -678,9 +701,9 @@ SYSTEM STATUS: Message routed successfully.`;
       {renderModal()}
       
       <nav className="w-full bg-white/80 backdrop-blur-md border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between z-30 shadow-sm sticky top-0 transition-all duration-300">
-        <div className="flex items-center space-x-2 group cursor-pointer hover:scale-105 transition-transform duration-300" onClick={() => setActiveTab('Dashboard')}>
+        <div className="flex items-center space-x-2 group cursor-pointer hover:scale-105 transition-transform duration-300" onClick={() => { setActiveTab('Dashboard'); setIsMobileMenuOpen(false); }}>
           <HeartPulse className="text-blue-600" size={28} />
-          <span className="text-xl font-bold text-[#0f2851]">Aura Health Chatbot</span>
+          <span className="text-lg sm:text-xl font-bold text-[#0f2851] truncate max-w-[150px] sm:max-w-none">Aura Health</span>
         </div>
         
         <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
@@ -713,26 +736,67 @@ SYSTEM STATUS: Message routed successfully.`;
           </div>
         </div>
 
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <div className="flex items-center space-x-2 cursor-pointer group hover:bg-gray-50 px-2 sm:px-3 py-1.5 rounded-full transition-all border border-transparent hover:border-gray-100">
-            <span className="text-sm font-medium text-gray-700 hidden sm:block group-hover:text-blue-600 transition-colors">{user.name}</span>
+            <span className="text-sm font-medium text-gray-700 hidden lg:block group-hover:text-blue-600 transition-colors">{user.name}</span>
             <UserCircle2 className="text-gray-400 group-hover:text-blue-500 transition-colors" size={26} />
           </div>
-          <button onClick={onLogout} title="Log Out" className="text-gray-400 hover:text-red-500 transition-all hover:bg-red-50 p-2 rounded-full active:scale-90 hover:rotate-12">
+          <button onClick={onLogout} title="Log Out" className="text-gray-400 hover:text-red-500 transition-all hover:bg-red-50 p-2 rounded-full active:scale-90 hidden sm:block">
             <LogOut size={20} />
           </button>
-          <button className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-all">
-            <Menu size={24} />
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-all">
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
-      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 flex flex-col z-20 relative pt-6 pb-12 animate-fade-in">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8 tracking-tight flex items-center justify-center gap-3">
-          {activeTab === 'Consult AI' && 'Symptom Checker & Clinical NLP'}
-          {activeTab === 'Dashboard' && `Welcome back, ${user.name.split(' ')[0]}!`}
-          {activeTab === 'Appointments' && 'Manage Appointments'}
-          <span className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs rounded-full shadow-lg">V2.0 LIVE</span>
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 top-[60px] bg-[#0f2851]/20 backdrop-blur-md z-40 animate-fade-in" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="bg-white p-6 shadow-xl animate-slide-up flex flex-col space-y-4" onClick={e => e.stopPropagation()}>
+            {['Dashboard', 'Consult AI', 'Appointments'].map(tab => (
+              <button 
+                key={tab}
+                onClick={() => { setActiveTab(tab); setIsMobileMenuOpen(false); }}
+                className={`flex items-center justify-between p-4 rounded-xl border ${activeTab === tab ? 'bg-blue-50 border-blue-200 text-blue-600 font-bold' : 'bg-gray-50 border-gray-100 text-gray-700'} transition-all`}
+              >
+                {tab}
+                <ChevronRight size={18} />
+              </button>
+            ))}
+            <div className="pt-4 border-t border-gray-100 mt-4 flex flex-col space-y-4">
+              <div className="flex items-center justify-between px-2">
+                <span className="text-sm font-bold text-gray-500 uppercase tracking-widest">Language</span>
+                <Globe size={18} className="text-gray-400" />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                 <select 
+                  value={language} 
+                  onChange={(e) => { setLanguage(e.target.value); setIsMobileMenuOpen(false); showToast(`Language changed!`); }}
+                  className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm"
+                >
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="te">Telugu</option>
+                  <option value="ta">Tamil</option>
+                </select>
+              </div>
+              <button onClick={onLogout} className="w-full py-4 bg-red-50 text-red-600 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-100 transition-colors">
+                <LogOut size={20} /> Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 flex flex-col z-20 relative pt-4 sm:pt-6 pb-12 animate-fade-in">
+        <h1 className="text-xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8 tracking-tight flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+          <span className="truncate max-w-[250px] sm:max-w-none">
+            {activeTab === 'Consult AI' && 'Symptom Checker'}
+            {activeTab === 'Dashboard' && `Hi, ${user.name.split(' ')[0]}!`}
+            {activeTab === 'Appointments' && 'Appointments'}
+          </span>
+          <span className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-[10px] sm:text-xs rounded-full shadow-lg">V2.0 LIVE</span>
         </h1>
 
         {/* --- DASHBOARD VIEW --- */}
@@ -983,27 +1047,20 @@ SYSTEM STATUS: Message routed successfully.`;
         )}
       </main>
 
-      <footer className="w-full mt-auto border-t border-gray-200 bg-white/80 backdrop-blur-sm px-6 py-5 flex flex-col sm:flex-row items-center justify-between z-20 text-sm text-gray-500 font-medium gap-4">
-        <div className="flex items-center space-x-6">
+      <footer className="w-full mt-auto border-t border-gray-200 bg-white/50 backdrop-blur-sm px-6 py-4 flex flex-col sm:flex-row items-center justify-between z-20 text-sm text-gray-500 font-medium">
+        <div className="flex items-center space-x-6 mb-4 sm:mb-0">
           <button onClick={() => showToast("Privacy Policy opened.")} className="hover:text-blue-600 transition-colors">Privacy Policy</button>
           <button onClick={() => showToast("Terms opened.")} className="hover:text-blue-600 transition-colors">Terms</button>
-          <a
-            href="https://www.linkedin.com/in/kadariuday"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-[#0077B5] transition-colors group"
-          >
-            {/* LinkedIn SVG Logo */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-[#0077B5]">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            <span className="group-hover:underline">Contact</span>
+          <a href="https://www.linkedin.com/in/kadariuday" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors flex items-center gap-1">
+            <UserCircle2 size={14} /> Contact Us (LinkedIn)
           </a>
         </div>
-        <div className="flex flex-col sm:flex-row items-center gap-2 text-center">
-          <span className="text-gray-400">Maintained by <span className="font-semibold text-gray-700">Kadari Uday</span></span>
-          <span className="hidden sm:block text-gray-300">·</span>
-          <span>© 2026 Aura Health Chatbot</span>
+        <div className="flex flex-col items-center sm:items-end gap-1.5">
+          <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[11px] font-bold text-blue-600 shadow-sm animate-pulse">
+             <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+             Maintained by Kadari Uday
+          </div>
+          <div className="text-[10px] text-gray-400">© 2026 Aura Health Chatbot</div>
         </div>
       </footer>
       <style dangerouslySetInnerHTML={{__html: `

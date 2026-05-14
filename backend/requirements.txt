@@ -1,7 +1,9 @@
 fastapi
 uvicorn
-spacy
-transformers
-torch
 pandas
 deep-translator
+mysql-connector-python
+pydantic
+python-multipart
+email-validator
+python-dotenv
