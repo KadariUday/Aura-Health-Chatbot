@@ -1,8 +1,5 @@
 fastapi
 uvicorn
-pandas
-deep-translator
-mysql-connector-python
 pydantic
 python-multipart
 email-validator
