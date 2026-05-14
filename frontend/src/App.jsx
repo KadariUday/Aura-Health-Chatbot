@@ -264,6 +264,32 @@ const Dashboard = ({ user, onLogout }) => {
 
   const [bookingData, setBookingData] = useState({ doctor: null, problem: '', date: '', time: '' });
   const [newDoctorData, setNewDoctorData] = useState({ specialty: '', name: '', hospital: '', phone: '', email: '', availability: '' });
+  const [passwords, setPasswords] = useState({ old: '', new: '', confirm: '' });
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    if (passwords.new !== passwords.confirm) {
+      showToast("❌ New passwords do not match!");
+      return;
+    }
+    if (passwords.new.length < 6) {
+      showToast("❌ New password must be at least 6 characters!");
+      return;
+    }
+    try {
+      await axios.post(`${API_BASE_URL}/api/change-password`, {
+        email: user.email,
+        old_password: passwords.old,
+        new_password: passwords.new
+      });
+      showToast("✅ Password changed successfully!");
+      setModal({ isOpen: false });
+      setPasswords({ old: '', new: '', confirm: '' });
+    } catch (err) {
+      showToast(`❌ ${err.response?.data?.detail || "Error changing password"}`);
+    }
+  };
+
 
   const toggleFavorite = (docName) => {
     setUserData(prev => {
@@ -678,10 +704,38 @@ SYSTEM STATUS: Message routed successfully via MedChat AI.`;
                   </label>
                 )) : (
                   <p className="text-sm text-gray-500">No active medications prescribed.</p>
+                )) : (
+                  <p className="text-sm text-gray-500">No active medications prescribed.</p>
                 )}
               </div>
             </div>
           )}
+
+          {modal.type === 'change_password' && (
+            <div className="p-6">
+              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                <Lock className="text-indigo-600" size={24} />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Change Password</h2>
+              <p className="text-gray-600 text-sm mb-6">Enter your details to update your security.</p>
+              <form onSubmit={handleChangePassword} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Current Password</label>
+                  <input required type="password" value={passwords.old} onChange={e => setPasswords({...passwords, old: e.target.value})} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase mb-1">New Password</label>
+                  <input required type="password" value={passwords.new} onChange={e => setPasswords({...passwords, new: e.target.value})} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Confirm New Password</label>
+                  <input required type="password" value={passwords.confirm} onChange={e => setPasswords({...passwords, confirm: e.target.value})} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" />
+                </div>
+                <button type="submit" className="w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-colors mt-2">Update Password</button>
+              </form>
+            </div>
+          )}
+
         </div>
       </div>
     );
@@ -737,10 +791,14 @@ SYSTEM STATUS: Message routed successfully via MedChat AI.`;
         </div>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
-          <div className="flex items-center space-x-2 cursor-pointer group hover:bg-gray-50 px-2 sm:px-3 py-1.5 rounded-full transition-all border border-transparent hover:border-gray-100">
+          <div 
+            onClick={() => setModal({ isOpen: true, type: 'change_password' })}
+            className="flex items-center space-x-2 cursor-pointer group hover:bg-gray-50 px-2 sm:px-3 py-1.5 rounded-full transition-all border border-transparent hover:border-gray-100"
+          >
             <span className="text-sm font-medium text-gray-700 hidden lg:block group-hover:text-blue-600 transition-colors">{user.name}</span>
             <UserCircle2 className="text-gray-400 group-hover:text-blue-500 transition-colors" size={26} />
           </div>
+
           <button onClick={onLogout} title="Log Out" className="text-gray-400 hover:text-red-500 transition-all hover:bg-red-50 p-2 rounded-full active:scale-90 hidden sm:block">
             <LogOut size={20} />
           </button>
