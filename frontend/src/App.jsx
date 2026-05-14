@@ -704,8 +704,6 @@ SYSTEM STATUS: Message routed successfully via MedChat AI.`;
                   </label>
                 )) : (
                   <p className="text-sm text-gray-500">No active medications prescribed.</p>
-                )) : (
-                  <p className="text-sm text-gray-500">No active medications prescribed.</p>
                 )}
               </div>
             </div>
