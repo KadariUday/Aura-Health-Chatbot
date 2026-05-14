@@ -51,32 +51,32 @@ const AuthPage = ({ onLogin }) => {
       <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob pointer-events-none"></div>
 
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 animate-slide-up border border-gray-100 min-h-[600px]">
-        <div className="w-full md:w-1/2 bg-gradient-to-br from-[#0070f3] to-indigo-600 text-white p-12 flex flex-col justify-between relative overflow-hidden">
+      <div className="w-full max-w-5xl bg-white md:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 animate-slide-up border border-gray-100 min-h-screen md:min-h-[600px]">
+        <div className="w-full md:w-1/2 bg-gradient-to-br from-[#0070f3] to-indigo-600 text-white p-8 md:p-12 flex flex-col justify-center md:justify-between relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-          <div className="relative z-10 flex items-center space-x-3 mb-10">
+          <div className="relative z-10 flex items-center space-x-3 mb-6 md:mb-10">
             <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
-              <HeartPulse size={32} className="text-white" />
+              <HeartPulse size={24} className="text-white md:w-8 md:h-8" />
             </div>
-            <span className="text-3xl font-bold tracking-tight">Aura Health Chatbot</span>
+            <span className="text-xl md:text-3xl font-bold tracking-tight">Aura Health</span>
           </div>
           
           <div className="relative z-10">
-            <h1 className="text-4xl font-extrabold mb-4 leading-tight">Smart. Secure. <br/>Explainable.</h1>
-            <p className="text-blue-100 text-lg mb-8 leading-relaxed">
-              Experience our upgraded Medical NLP Engine featuring Voice Input, Kaggle-Dataset Integrated Explainable AI (XAI), and real-time Emergency Detection.
+            <h1 className="text-2xl md:text-4xl font-extrabold mb-2 md:mb-4 leading-tight">Smart. Secure. <br className="hidden md:block"/>Explainable.</h1>
+            <p className="text-blue-100 text-sm md:text-lg mb-4 md:mb-8 leading-relaxed opacity-90">
+              Experience our upgraded Medical NLP Engine featuring Kaggle-Dataset Integrated XAI.
             </p>
           </div>
           
-          <div className="relative z-10 flex items-center space-x-4 text-sm text-blue-200">
-            <span>✓ Multilingual Support</span>
+          <div className="relative z-10 flex items-center space-x-4 text-[10px] md:text-sm text-blue-200">
+            <span>✓ Multilingual</span>
             <span>✓ Voice Enabled</span>
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 p-10 sm:p-16 bg-white flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">{isLogin ? 'Welcome Back' : 'Create an Account'}</h2>
-          <p className="text-gray-500 mb-8">{isLogin ? 'Enter your credentials to access your dashboard.' : 'Sign up to start chatting with MedChat AI.'}</p>
+        <div className="w-full md:w-1/2 p-8 sm:p-16 bg-white flex flex-col justify-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">{isLogin ? 'Welcome Back' : 'Create an Account'}</h2>
+          <p className="text-sm md:text-base text-gray-500 mb-6 md:mb-8">{isLogin ? 'Enter your credentials to access your dashboard.' : 'Sign up to start chatting with MedChat AI.'}</p>
           
           {error && (
             <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-6 text-sm animate-fade-in flex items-center">
