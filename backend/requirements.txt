@@ -1,6 +1,13 @@
+# fastapi
+# uvicorn
+# pydantic
+# python-multipart
+# email-validator
+# python-dotenv
 fastapi
 uvicorn
 pydantic
 python-multipart
 email-validator
 python-dotenv
+pandas
